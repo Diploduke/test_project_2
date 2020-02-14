@@ -13,6 +13,7 @@ let appData = {
     savings : false
  };
 
+// --- 1. Цмкл FOR ---
 for (let i = 1; i < 3; i++) {
     let a = prompt("Введите обязательную статью расходов в этом месяце", ""), // statya теперь a
         b = prompt("Во сколько обойдется?", ""); // rashod теперь b
@@ -46,6 +47,52 @@ for (let i = 1; i < 3; i++) {
         continue;
     }
 };
+
+// --- 2. Цикл while ---
+/*
+let i = 0;
+
+while (i < 2) {
+    let a = prompt("Введите обязательную статью расходов в этом месяце", ""), // statya теперь a
+        b = prompt("Во сколько обойдется?", ""); // rashod теперь b
+    i++;
+    
+    if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null  
+        && a != '' && b != '' && a.length < 50 ) {
+        appData.expenses[a] = b;
+        console.log("Все получилось!");
+        console.log(appData);
+    } else {
+        console.log("При вводе данных что-то пошло не так...");
+        i = 0;
+        continue;
+    }
+};
+*/
+
+// --- 3. Цикл DO ---
+/*
+let i = 0;
+
+do {
+    let a = prompt("Введите обязательную статью расходов в этом месяце", ""), // statya теперь a
+        b = prompt("Во сколько обойдется?", ""); // rashod теперь b
+    i++;
+    
+    if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null  
+        && a != '' && b != '' && a.length < 50 ) {
+        appData.expenses[a] = b;
+        console.log("Все получилось!");
+        console.log(appData);
+    } else {
+        console.log("При вводе данных что-то пошло не так...");
+        i = 0;
+        continue;
+    }
+}
+while (i < 2);
+*/
+
 
 appData.moneyPerDay = money / 30;
 
