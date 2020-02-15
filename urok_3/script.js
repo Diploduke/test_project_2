@@ -17,23 +17,23 @@
 
 // Тема 3. Функции =======================================
 
-let calc = (a,b) => a+b;
+// let calc = (a,b) => a+b;
 
-console.log(calc(3,4));
-console.log(calc(8,4));
+// console.log(calc(3,4));
+// console.log(calc(8,4));
 
-let str = "test"; 
-console.log(str.length); // свойства
+// let str = "test"; 
+// console.log(str.length); // свойства
 
-console.log(str.toUpperCase()); // методы
-console.log(str.toLowerCase()); // методы
+// console.log(str.toUpperCase()); // методы
+// console.log(str.toLowerCase()); // методы
 
-let twelve = "12.2";
-console.log(Math.round(twelve)); // округляет
+// let twelve = "12.2";
+// console.log(Math.round(twelve)); // округляет
   
-let twelve1 = "12.2px";
-console.log(parseInt(twelve1));   // 12 преобразует (в т.ч. в другую систему исчисления)
-console.log(parseFloat(twelve1)); // 12.2
+// let twelve1 = "12.2px";
+// console.log(parseInt(twelve1));   // 12 преобразует (в т.ч. в другую систему исчисления)
+// console.log(parseFloat(twelve1)); // 12.2
 
 // let num = 20;
 
@@ -55,13 +55,13 @@ function calc(a,b) {
      return (a + b);
 }
 */
-function retVar() {
-    let num = 50;
-    return num; // выводит переменную за пределы функции, закрывает функцию.
-}
+// function retVar() {
+//     let num = 50;
+//     return num; // выводит переменную за пределы функции, закрывает функцию.
+// }
 
-let anotherNum = retVar();
-console.log(anotherNum);
+// let anotherNum = retVar();
+// console.log(anotherNum);
 
 /* *** function expression - создается, когда код до нее доходит. *** */ 
 
