@@ -51,7 +51,6 @@ for (let i = 1; i < 3; i++) {
 // --- 2. Цикл while ---
 /*
 let i = 0;
-
 while (i < 2) {
     let a = prompt("Введите обязательную статью расходов в этом месяце", ""), // statya теперь a
         b = prompt("Во сколько обойдется?", ""); // rashod теперь b
@@ -73,7 +72,6 @@ while (i < 2) {
 // --- 3. Цикл DO ---
 /*
 let i = 0;
-
 do {
     let a = prompt("Введите обязательную статью расходов в этом месяце", ""), // statya теперь a
         b = prompt("Во сколько обойдется?", ""); // rashod теперь b
@@ -120,7 +118,6 @@ if (appData.moneyPerDay <= 100) {
 
 /* --- if простой и в виде "тернарного" оператора ---
 let num = 50;
-
 if (num < 49) {
     console.log("Неправильно!");
 } else if (num > 100) {
@@ -128,14 +125,12 @@ if (num < 49) {
 } else {
     console.log("Правильно!");
 }
-
 (num == 50) ? console.log("Правильно!") : console.log("Неправильно!");
 */
 
 // --- switch --- 
 /*
 let num = 50;
-
 switch (num) {
     case num < 49:
         console.log("Неправильно!");
@@ -153,28 +148,20 @@ switch (num) {
         console.log("Что-то не так!");
         break;
 }
-
 // --- while (цикл) ---
-
 let num = 50;
-
 // while (num < 55) {
 //     console.log(num);
 //     num++;
 // }
-
 // --- do (что-то сделать, потом проверить) ---
-
 let num = 50;
-
 do {
     console.log(num);
     num++;
 }
 while (num < 55)
-
 // --- for ---
-
 for (let i = 1; i < 8; i++) {
     if (i == 6) {
 //        break;    // Прервать
@@ -184,18 +171,3 @@ for (let i = 1; i < 8; i++) {
 }
 */
 // Конец темы 2 =======================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
