@@ -2,18 +2,126 @@
 
 // Задание 3. =======================================
 
+let money, time;
 
+function start() {
+    money = +prompt("Ваш бюджет на месяц?", "30000");
+    time = prompt("Введите дату в формате YYYY-MM-DD", "2020-01-01");
 
+    while (isNaN(money) || money == "" || money == null) {
+        money = +prompt("Ваш бюджет на месяц?", "30000");
+    }
+}
 
+start();
 
+let appData = {
+    budget: money,
+    timeData: time,
+    expenses: {},
+    optionalExpenses: {},
+    income: [],
+    savings: true
+};
 
+function chooseExpenses() {
+    for (let i = 1; i < 3; i++) {
+        let a = prompt("Введите обязательную статью расходов в этом месяце", ""), // statya теперь a
+            b = prompt("Во сколько обойдется?", ""); // rashod теперь b
 
+        if ((typeof (a)) === 'string' && (typeof (a)) != null && (typeof (b)) != null &&
+            a != '' && b != '' && a.length < 50) {
+            appData.expenses[a] = b;
+            console.log("Все получилось!");
+            console.log(appData);
+        } else {
+            console.log("При вводе данных что-то пошло не так...");
+            let expensesObj = Object.keys(appData.expenses);
+            if (expensesObj.length === 1) {
+                i = 1;
+            } else {
+                i = 0;
+            }
+            continue;
+        }
+    };
+}
 
+chooseExpenses();
 
+function detectDayBudget() {
+    appData.moneyPerDay = (money / 30).toFixed();
+    alert("Ежедневный бюджет: " + appData.moneyPerDay);
+}
 
+detectDayBudget();
 
+/* appData.moneyPerDay = (money / 30).toFixed(); // 1. Округляет до целого, либо до 
+                                              // кол-ва знаков, указ. в ().
+                                              // 2. Возвращает строку.
+alert(" Ежедневный бюджет: " + appData.moneyPerDay); */
 
+function detectLevel() {
+    if (appData.moneyPerDay <= 100) {
+        console.log("Минималка");
+    } else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
+        console.log("Средний уровень достатка");
+    } else if (appData.moneyPerDay >= 2000) {
+        console.log("Высокий уровень достатка");
+    } else {
+        console.log("Ошибка");
+    }
+}
 
+detectLevel();
+
+function chooseOptExpenses() {
+    for (let i = 1; i < 4; i++) {
+        let b = prompt("Введите необязательную статью расходов " + i, "");
+        // b = prompt("Во сколько обойдется?", "");
+
+        if ((typeof (b)) === 'string' && (typeof (b)) != null &&
+            b != '') {
+            // console.log(i);
+            let a = i;
+            appData.optionalExpenses[a] = b;
+            console.log("Все получилось!");
+            // console.log("Ключ: " + a + " | Значение: " + appData.optionalExpenses[a]);
+        } else {
+            let a = i;
+            console.log("При вводе данных что-то пошло не так...");
+            let optionalExpensesObj = Object.keys(appData.optionalExpenses);
+            // console.log("Ключ: " + a + " | Значение: " + appData.optionalExpenses[a]);
+            // console.log(optionalExpensesObj.length);
+
+            if (optionalExpensesObj.length === 1) {
+                i = 1;
+            } else if (optionalExpensesObj.length === 2) {
+                i = 2;
+            } else {
+                i = 0;
+            }
+            continue;
+        }
+    }
+}
+
+console.log(appData);
+chooseOptExpenses();
+
+function checkSavings() {
+    if (appData.savings == true) {
+        let save = +prompt("Какова сумма накоплений?"),
+            percent = +prompt("Под какие проценты?");
+
+        appData.monthIncome = save / 100 / 12 * percent;
+        alert("Доход в месяц с депозита: " + appData.monthIncome);
+    }
+}
+
+checkSavings();
+
+// Конец задания 3 ========================================
 
 // Тема 3. Функции =======================================
 
@@ -30,7 +138,7 @@
 
 // let twelve = "12.2";
 // console.log(Math.round(twelve)); // округляет
-  
+
 // let twelve1 = "12.2px";
 // console.log(parseInt(twelve1));   // 12 преобразует (в т.ч. в другую систему исчисления)
 // console.log(parseFloat(twelve1)); // 12.2
@@ -63,7 +171,7 @@ function calc(a,b) {
 // let anotherNum = retVar();
 // console.log(anotherNum);
 
-/* *** function expression - создается, когда код до нее доходит. *** */ 
+/* *** function expression - создается, когда код до нее доходит. *** */
 
 /*
 let calc = function(a,b) {
@@ -77,5 +185,3 @@ console.log(calc(8,4));
 /* *** Стрелочные - Современный краткий формат (можно не везде). *** */
 
 // Конец темы 3 =======================================
-
-
