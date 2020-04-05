@@ -39,6 +39,7 @@ div.classList.add('black');
 
 // div.innerHTML = '<h2>Hello World!</h2>';     // добавление текста без защиты
 div. textContent = 'Hello World!';              // добавление ТОЛЬКО текста
+// div.style.fontSize = '24px';
 
 document.body.insertBefore(div, circle[0]);     // Вставка
 document.body.removeChild(circle[1]);           // Удаление
