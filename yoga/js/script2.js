@@ -134,7 +134,7 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // ======================= FORM ============================
+    // form ============================
 
     let message = {
         loading: 'Загрузка...',
@@ -143,90 +143,66 @@ window.addEventListener('DOMContentLoaded', function() {
     };
     
     let form = document.querySelector('.main-form'),
-        input = form.getElementsByTagName('input'),
+        input = document.getElementsByTagName('input'),
         statusMessage = document.createElement('div'),
-        formContact = document.getElementById('form'),
-        inputContact = formContact.getElementsByTagName('input'),
-        statusMessageContact = document.createElement('div');
+        formContact = document.getElementById('form');
 
     statusMessage.classList.add('status');
-    statusMessageContact.classList.add('status');
-    statusMessageContact.style.color = '#fff';
     
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        form.appendChild(statusMessage);
+    function sendForm(elem) {   // 1-form; 2-formContact
+        elem.addEventListener('submit', function(event) {
+            event.preventDefault();
+            elem.appendChild(statusMessage);
 
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        // --- Вариант 1, при помощи FormData
-        // request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        // --- Вариант 2, при помощи JSON
-        request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            let formData = new FormData(elem);
 
-        let formData = new FormData(form);
+            function postData(data) {
+                return new Promise(function(resolve, reject) {
+                    let request = new XMLHttpRequest();
+                    request.open('POST', 'server.php');
+                    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-        // ------- Для JSON
-        let obj = {};
-        formData.forEach(function(value, key) {
-            obj[key] = value;
-        })
-        let json = JSON.stringify(obj);
-        // ------- Для JSON
+                    request.addEventListener('readystatechange', function() {   // изменение состояния запроса
+                        if (request.readyState < 4) {
+                            resolve()
+                        } else if (request.readyState === 4 && request.status == 200) {
+                            resolve()
+                        } else {
+                            reject()
+                        }
+                    })
+                    request.send(data);
+                })
 
-        // request.send(formData);  // Для FormData
-        request.send(json);         // Для JSON
-
-        request.addEventListener('readystatechange', function() {   // изменение состояния запроса
-            if (request.readyState < 4) {
-                statusMessage.innerHTML = message.loading;
-            } else if (request.readyState === 4 && request.status == 200) {
-                statusMessage.innerHTML = message.success;
-            } else {
-                statusMessage.innerHTML = message.failure;
             }
-        });   
-
-        for (let i = 0; i < input.length; i++) {
-            input[i].value = '';
-        }
-
-    });
-
-    // form Контактная ============================
-
-    formContact.addEventListener('submit', function(event) {
-        event.preventDefault();
-        formContact.appendChild(statusMessageContact);
-
-        // console.log(formContact);
-        // console.log(inputContact[0].value);
-        // console.log(inputContact[1].value);
-
-        let request1 = new XMLHttpRequest();
-        request1.open('POST', 'server.php');
-        request1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        let formData1 = new FormData(formContact);
-
-        // console.log(formData1);
-
-        request1.send(formData1);
-
-        request1.addEventListener('readystatechange', function() {   // изменение состояния запроса
-            if (request1.readyState < 4) {
-                statusMessageContact.innerHTML = message.loading;
-            } else if (request1.readyState === 4 && request1.status == 200) {
-                statusMessageContact.innerHTML = message.success;
-            } else {
-                statusMessageContact.innerHTML = message.failure;
+            
+            function clearInput() {
+                for (let i = 0; i < input.length; i++) {
+                    input[i].value = '';
+                }
             }
-        });   
+            
+            postData(formData)
+                .then(() => {
+                    statusMessage.innerHTML = message.loading;
+                    // console.log(message.loading);
+                })
+                .then(() => {
+                    statusMessage.innerHTML = message.success;
+                    // console.log(message.success);
+                    clearInput();
+                })
+                .catch(() => {
+                    statusMessage.innerHTML = message.failure;
+                    // console.log(message.failure);
+                    clearInput();
+                })
 
-        for (let i = 0; i < inputContact.length; i++) {
-            inputContact[i].value = '';
-        }
+        });
+    }
 
-    });
+    sendForm(form);
+    sendForm(formContact); 
 
 
 });
