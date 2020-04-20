@@ -205,6 +205,109 @@ window.addEventListener('DOMContentLoaded', function() {
     sendForm(formContact); 
 
 
+// =============== СЛАЙДЕР ======================
+
+let slideIndex = 1,         // Показ слайда по умолчанию (первый)
+    slides = document.querySelectorAll('.slider-item'),
+    prev = document.querySelector('.prev'),
+    next = document.querySelector('.next'),
+    dotsWrap = document.querySelector('.slider-dots'),
+    dots = document.querySelectorAll('.dot');
+
+showSlides(slideIndex);
+
+function showSlides (n) {   // Скрываем все (слайды, точки) и показываем один, 
+                            // соответствующий slideIndex
+    if (n > slides.length) {        // После последнего слайда (+) переходим на первый
+        slideIndex = 1;            
+    }
+
+    if (n < 1) {
+        slideIndex = slides.length; // После первого слайда (-) переходим на последний
+    }
+
+    slides.forEach((item) => item.style.display = 'none'); // Первый способ (перебор слайдов)
+    // for (let i = 0; i <  slides.length; i++) {          // Второй способ
+    //     slides[i].style.display = 'none';
+    // }  
+    dots.forEach((item) => item.classList.remove('dot-active'));    // Перебор точек
+    slides[slideIndex - 1].style.display = 'block';
+    dots[slideIndex - 1].classList.add('dot-active');
+
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n)
+    }
+
+    function currentSlides(n) {
+        showSlides(slideIndex = n);
+    }
+
+    prev.addEventListener('click', function() {
+        plusSlides(-1);
+    });
+
+    next.addEventListener('click', function() {
+        plusSlides(1);
+    });
+
+    dotsWrap.addEventListener('click', function(event) {
+        for (let i = 0; i < dots.length + 1; i++) {
+            if (event.target.classList.contains('dot') && event.target == dots[i-1]) {
+                currentSlides(i);
+            }
+        }
+    });
+
+// =============== КАЛЬКУЛЯТОР ======================
+
+let persons = document.querySelectorAll('.counter-block-input')[0],
+    restDays = document.querySelectorAll('.counter-block-input')[1],
+    place = document.getElementById('select'),
+    totalValue = document.getElementById('total'),
+    personsSum = 0,
+    daysSum = 0,
+    total = 0;
+
+    totalValue.innerHTML = 0;
+
+    persons.addEventListener('change', function() {
+        personsSum = +this.value;
+        total = (daysSum + personsSum) * 4000;
+
+        if (restDays.value == '' || persons.value == '') {
+            totalValue.innerHTML = 0;
+        } else if (restDays.value == 0 || persons.value == 0) {
+            totalValue.innerHTML = 0;
+        } else {
+            totalValue.innerHTML = total;
+        }
+    });
+
+    restDays.addEventListener('change', function() {
+        daysSum = +this.value;
+        total = (daysSum + personsSum) * 4000;
+
+        if (persons.value == '' || restDays.value == '') {
+            totalValue.innerHTML = 0;
+        } else if (persons.value == 0 || restDays.value == 0) {
+            totalValue.innerHTML = 0;
+        } else {
+            totalValue.innerHTML = total;
+        }
+    });
+
+    place.addEventListener('change', function() {
+        if (persons.value == '' || persons.value == '') {
+            totalValue.innerHTML = 0;
+        } else {
+            let a = total;          // Временная перменная для сохранения total
+            totalValue.innerHTML = a * this.options[this.selectedIndex].value;                        // чтобы при смене селектов данные не суммировались
+        }
+    });
+
+
 });
 
 
